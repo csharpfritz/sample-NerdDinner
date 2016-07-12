@@ -28,9 +28,14 @@ namespace NerdDinner.Web
                 builder.AddApplicationInsightsSettings(developerMode: true);
             }
             Configuration = builder.Build();
+
+            HostingEnvironment = env;
+
         }
 
         public IConfiguration Configuration { get; private set; }
+
+        public IHostingEnvironment HostingEnvironment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -39,7 +44,7 @@ namespace NerdDinner.Web
             services.AddDbContext<NerdDinnerDbContext>(options =>
                     options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
 
-          services.AddTransient(typeof(INerdDinnerRepository), typeof(NerdDinnerRepository));
+          services.AddTransient<INerdDinnerRepository, NerdDinnerRepository>();
 
             // Add Identity services to the services container
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -64,8 +69,11 @@ namespace NerdDinner.Web
             services.AddMvc();
 
             // Add memory cache services
-            services.AddMemoryCache();
-            services.AddDistributedMemoryCache();
+            if (HostingEnvironment.IsProduction())
+            {
+              services.AddMemoryCache();
+              services.AddDistributedMemoryCache();
+            }
 
             // Add session related services.
             services.AddSession();

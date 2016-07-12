@@ -68,8 +68,8 @@ namespace NerdDinner.Web.Controllers
             string sort = null,
             bool descending = false)
         {
-            var user = await _userManager.FindByIdAsync(HttpContext.User.Identity.Name);
-            return await _repository.GetDinnersAsync(startDate, endDate, user.UserName, searchQuery, sort, descending, lat, lng, pageIndex, pageSize);
+            var user = HttpContext.User.Identity.Name;
+            return await _repository.GetDinnersAsync(startDate, endDate, user, searchQuery, sort, descending, lat, lng, pageIndex, pageSize);
         }
 
         [HttpGet("popular")]
@@ -152,9 +152,9 @@ namespace NerdDinner.Web.Controllers
         public async Task<IActionResult> DeleteDinnerAsync(int id)
         {
             var dinner = await _repository.GetDinnerAsync(id);
-            var user = await _userManager.FindByIdAsync(HttpContext.User.Identity.Name);
+            var user = HttpContext.User.Identity.Name;
 
-            if (!dinner.IsUserHost(user.UserName))
+            if (!dinner.IsUserHost(user))
             {
                 return View("Error");
             }
