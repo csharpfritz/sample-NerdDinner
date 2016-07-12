@@ -19,7 +19,6 @@ namespace NerdDinner.Web.Models
                 INerdDinnerRepository repository = new NerdDinnerRepository(db);
 
                 var users = GetUsers();
-                var dinners = GetDinners();
 
                 foreach (RegisterViewModel user in users)
                 {
@@ -31,9 +30,13 @@ namespace NerdDinner.Web.Models
                     await userManager.CreateAsync(applicationUser, user.Password);
                 }
 
-                foreach (Dinner dinner in dinners)
+                var dinners = GetDinners();
+                if (dinners.Length == 0)
                 {
+                  foreach (Dinner dinner in dinners)
+                  {
                     await repository.CreateDinnerAsync(dinner);
+                  }
                 }
             }
         }
