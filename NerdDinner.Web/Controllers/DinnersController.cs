@@ -12,6 +12,16 @@ using Microsoft.AspNetCore.Identity;
 
 namespace NerdDinner.Web.Controllers
 {
+    public static class UrlHelperExtensions
+    {
+        public static string RouteUrlAbsolute(this IUrlHelper helper, string routeName, object values)
+        {
+            var Request = helper.ActionContext.HttpContext.Request; //TODO: Is this a good idea?
+            return helper.RouteUrl(routeName, values, Request.Scheme, Request.Host.ToUriComponent());
+        }
+    }
+
+
     [Route("api/[controller]")]
     [Authorize]
     public class DinnersController : Controller
@@ -33,7 +43,7 @@ namespace NerdDinner.Web.Controllers
             var dinner = await _repository.GetDinnerAsync(id);
             if (dinner == null)
             {
-                return View("Error");
+                return NotFound();
             }
 
             return new ObjectResult(dinner);
@@ -117,35 +127,35 @@ namespace NerdDinner.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateDinnerAsync([FromBody] Dinner dinner)
         {
-            //var user = await _userManager.FindByIdAsync(Context.User.GetUserId());
-            dinner.UserName = HttpContext.User.Identity.Name;
+            if (ModelState.IsValid)
+            {
+                //var user = await _userManager.FindByIdAsync(Context.User.GetUserId());
+                dinner.UserName = User.Identity.Name;
+                
+                GeoLocation.SearchByPlaceNameOrZip(dinner);
+                dinner = await _repository.CreateDinnerAsync(dinner);
+                var url = Url.RouteUrlAbsolute("GetDinnerById", new { id = dinner.DinnerId });
 
-            GeoLocation.SearchByPlaceNameOrZip(dinner);
-            dinner = await _repository.CreateDinnerAsync(dinner);
-            var url = Url.RouteUrl("GetDinnerById", new { id = dinner.DinnerId }, Request.Scheme, Request.Host.ToUriComponent());
-
-            HttpContext.Response.StatusCode = (int)HttpStatusCode.Created;
-            HttpContext.Response.Headers["Location"] = url;
-            return new ObjectResult(dinner);
+                HttpContext.Response.StatusCode = (int)HttpStatusCode.Created;
+                HttpContext.Response.Headers["Location"] = url;
+                return new ObjectResult(dinner);
+            }
+            return BadRequest();
         }
 
         [HttpPut("{id:int}", Name = "UpdateDinnerById")]
         public async Task<IActionResult> UpdateDinnerAsync(int id, [FromBody] Dinner dinner)
         {
-            if (dinner.DinnerId != id)
+            if (ModelState.IsValid)
             {
-                return View("Error");
-            }
+                if (dinner.DinnerId != id) return BadRequest();
+                if (!dinner.IsUserHost(User.Identity.Name)) return BadRequest();
 
-            var user = HttpContext.User;
-            if (!dinner.IsUserHost(user.Identity.Name))
-            {
-                return View("Error");
+                GeoLocation.SearchByPlaceNameOrZip(dinner);
+                dinner = await _repository.UpdateDinnerAsync(dinner);
+                return new ObjectResult(dinner);
             }
-
-            GeoLocation.SearchByPlaceNameOrZip(dinner);
-            dinner = await _repository.UpdateDinnerAsync(dinner);
-            return new ObjectResult(dinner);
+            return BadRequest();
         }
 
         [HttpDelete("{id:int}", Name = "DeleteDinnerById")]
