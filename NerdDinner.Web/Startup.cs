@@ -118,8 +118,8 @@ namespace NerdDinner.Web
 
             app.UseFacebookAuthentication(new FacebookOptions
             {
-                AppId = "550624398330273",
-                AppSecret = "10e56a291d6b618da61b1e0dae3a8954"
+                AppId = "5609270052582677",
+                AppSecret = "3d9a853452f18ca5e928e96602307525"
             });
 
             app.UseGoogleAuthentication(new GoogleOptions
@@ -160,6 +160,11 @@ namespace NerdDinner.Web
             // Add MVC to the request pipeline
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name:"redirectjsdinner",
+                    template:"dinners/{*pathInfo}",
+                    defaults: new { controller = "Home", action = "Index" }
+                    );
                 routes.MapRoute(
                      name: "default",
                      template: "{controller}/{action}/{id?}",
