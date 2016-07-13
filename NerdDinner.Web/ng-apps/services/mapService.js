@@ -118,7 +118,7 @@
             var location = new Microsoft.Maps.Location(dinner.latitude, dinner.longitude);
             locs.push(location);
 
-            var pin = new Microsoft.Maps.Pushpin(location, { icon: '../../images/poi_usergenerated.gif', width: 50, height: 50 });
+            var pin = new Microsoft.Maps.Pushpin(location, { icon: '/images/poi_usergenerated.gif', width: 50, height: 50 });
             //pin details
             pin.Id = dinner.dinnerId;
             pin.Title = dinner.title;

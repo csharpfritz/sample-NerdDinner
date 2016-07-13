@@ -323,7 +323,7 @@
             var locs = [], location = new Microsoft.Maps.Location(dinner.latitude, dinner.longitude);
             locs.push(location);
             var pin = new Microsoft.Maps.Pushpin(location, {
-                icon: "../../images/poi_usergenerated.gif",
+                icon: "/images/poi_usergenerated.gif",
                 width: 50,
                 height: 50
             });
@@ -391,9 +391,9 @@
             var mapDescription = "<strong>" + dateString + "</strong><p>" + description + "</p>";
             return rsvps && (mapDescription += "<p>" + rsvps + " RSVPs</p>"), mapDescription;
         }
-        function showDetail() {
-            window.location("/#dinners/detail/8");
-        }
+        //function showDetail() {
+        //    window.location("/#dinners/detail/8");
+        //}
         function loadDinnersOnMap(dinners, zoomlevel) {
             for (var locs = [], i = 0; i < dinners.length; i++) {
                 var location = new Microsoft.Maps.Location(dinners[i].latitude, dinners[i].longitude);

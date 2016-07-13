@@ -30,8 +30,8 @@ namespace NerdDinner.Web.Models
         [MaxLength(32)]
         public string ContactPhone { get; set; }
 
-        [MaxLength(64)]
-        public string Country { get; set; }
+        //[MaxLength(64)]
+        //public string Country { get; set; }
 
         [Required]
         [MaxLength(256)]
