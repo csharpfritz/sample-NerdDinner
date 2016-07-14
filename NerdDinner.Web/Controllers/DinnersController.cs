@@ -44,6 +44,7 @@ namespace NerdDinner.Web.Controllers
             if (dinner == null)
             {
                 return NotFound();
+                
             }
 
             return new ObjectResult(dinner);
