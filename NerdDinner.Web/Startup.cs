@@ -124,8 +124,8 @@ namespace NerdDinner.Web
 
             app.UseGoogleAuthentication(new GoogleOptions
             {
-                ClientId = "995291875932-0rt7417v5baevqrno24kv332b7d6d30a.apps.googleusercontent.com",
-                ClientSecret = "J_AT57H5KH_ItmMdu0r6PfXm"
+                ClientId = "500918194801-v85iqffirr06ge97e5i901j1j455k9lp.apps.googleusercontent.com",
+                ClientSecret = "5nvZDaPvNtoCqukUbuo2qEOF"
             });
 
             app.UseTwitterAuthentication(new TwitterOptions
