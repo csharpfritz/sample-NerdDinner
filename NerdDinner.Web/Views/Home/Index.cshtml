@@ -1,5 +1,8 @@
-﻿@{
-    ViewBag.Title = "Nerd Dinner - Home";
+﻿@using Microsoft.AspNetCore.Hosting
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment env
+@{
+  ViewBag.Title = "Nerd Dinner - Home";
+
 }
 
 <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
@@ -18,19 +21,25 @@
         </div>
     </div>
     <div class="container">
-        <ul class="nav nav-tabs navbar-right">
-            <li role="presentation"><a href="/">Find Dinner</a></li>
-            @if (User.Identity.IsAuthenticated)
-            {
-                <li role="presentation"><a href="/dinners/add">Host Dinner</a></li>
-                    <li role="presentation"><a href="/dinners/my">My Dinners</a></li>
-            }
-            else
-            {
-                <li role="presentation"><a href="/account/login">Host Dinner</a></li>
-            }
-            <li role="presentation"><a href="/about">About</a></li>
-        </ul>
+      <ul class="nav nav-tabs navbar-right">
+        <li role="presentation"><a href="/">Find Dinner</a></li>
+        @if (User.Identity.IsAuthenticated)
+        {
+          <li role="presentation"><a href="/dinners/add">Host Dinner</a></li>
+                <li role="presentation"><a href="/dinners/my">My Dinners</a></li>
+        }
+        else
+        {
+          <li role="presentation"><a href="/account/login">Host Dinner</a></li>
+        }
+        <li role="presentation"><a href="/about">About</a></li>
+        @if (env.IsDevelopment())
+        {
+          <li role="presentation"><a href="/errors">Error Log</a></li>
+
+        }
+      </ul>
+
     </div>
 </header>
 

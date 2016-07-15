@@ -120,3 +120,11 @@ h4 {
     float: right;
   }
 }
+
+/** Error Log **/
+
+.errorLog td {
+  font-size: x-small;
+}
+
+/** end Error Log */
