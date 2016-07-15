@@ -1,0 +1,25 @@
+﻿<div class="container main-view">
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <h4>ASP.NET Errors</h4>
+
+      <table class="table table-responsive table-striped errorLog">
+        <thead>
+          <tr>
+            <th>Local Date</th>
+            <th>Severity</th>
+            <th>Exception</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="error in errors | orderBy: 'OccurredAt': true">
+            <td>{{error.OccurredAt | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td>{{error.LevelText}}</td>
+            <td><b>{{error.Exception.Source}}</b> - {{error.Message}}<br/>{{error.Exception.Message}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

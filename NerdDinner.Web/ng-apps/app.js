@@ -59,6 +59,11 @@
                 templateUrl: '/account/register',
                 controller: 'registerController'
             })
+            .when('/errors', {
+                title: 'Nerd Dinner - Error Log',
+                templateUrl: '/views/errors.html',
+                controller: 'errorController'
+            })
             .when('/about', {
                 title: 'Nerd Dinner - About',
                 templateUrl: '/views/about.html',

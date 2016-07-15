@@ -52,6 +52,10 @@
             title: "Nerd Dinner - Register",
             templateUrl: "/account/register",
             controller: "registerController"
+        }).when("/errors", {
+            title: "Nerd Dinner - Error Log",
+            templateUrl: "/views/errors.html",
+            controller: "errorController"
         }).when("/about", {
             title: "Nerd Dinner - About",
             templateUrl: "/views/about.html"
@@ -63,6 +67,15 @@
         });
     }
     config.$inject = [ "$routeProvider", "$locationProvider" ], angular.module("nerdDinner", [ "ngRoute", "ui.bootstrap", "dinnersService" ]).config(config);
+}(), function() {
+    "use strict";
+    function errorController($scope, $location, errorService) {
+        var vm = this;
+        vm.initialize = function() {
+            $scope.errors = errorService.all.query();
+        }, vm.initialize();
+    }
+    angular.module("nerdDinner").controller("errorController", errorController), errorController.$inject = [ "$scope", "$location", "errorSvc" ];
 }(), function() {
     "use strict";
     function homeController($scope, $location, dinner, mapService) {
@@ -164,7 +177,7 @@
     function deleteController($scope, $routeParams, $location, dinner, isUserAuthenticated) {
         "False" == isUserAuthenticated.success && $location.path("/account/login"), $scope.dinner = dinner.all.get({
             id: $routeParams.id
-        }), $scope["delete"] = function() {
+        }), $scope.delete = function() {
             var result = dinner.deleteDinner($routeParams.id);
             result.then(function(result) {
                 result.success && $location.path("/dinners/my");
@@ -182,7 +195,11 @@
     deleteController.$inject = [ "$scope", "$routeParams", "$location", "dinner", "isUserAuthenticated" ];
 }(), function() {
     "use strict";
-    function loginController($scope, $location) {}
+    function loginController($scope, $location) {
+        $scope.home = function() {
+            $location.path("/");
+        };
+    }
     angular.module("nerdDinner").controller("loginController", loginController), loginController.$inject = [ "$scope", "$location" ];
 }(), function() {
     "use strict";
@@ -280,7 +297,7 @@
             },
             deleteDinner: function(dinnerId) {
                 var deferredObject = $q.defer();
-                return $http["delete"]("/api/dinners/" + dinnerId).success(function(data) {
+                return $http.delete("/api/dinners/" + dinnerId).success(function(data) {
                     deferredObject.resolve({
                         success: !0
                     });
@@ -305,6 +322,14 @@
         }), deferredObject.promise;
     }
     angular.module("dinnersService", [ "ngResource" ]).factory("dinner", dinner), dinner.$inject = [ "$resource", "$http", "$q" ];
+}(), function() {
+    "use strict";
+    function errorService($resource) {
+        return {
+            all: $resource("/api/errorlog")
+        };
+    }
+    angular.module("nerdDinner").factory("errorSvc", errorService), errorService.$inject = [ "$resource" ];
 }(), function() {
     "use strict";
     function mapService($http, $location, $q) {
@@ -377,7 +402,7 @@
                     title: currentDinnerTitle,
                     description: popupDescription(pin.Description, dateString, pin.rsvps),
                     titleClickHandler: showDetail,
-                    offset: new Microsoft.Maps.Point(-12, 40)
+                    offset: new Microsoft.Maps.Point((-12), 40)
                 };
                 null != infobox && (map.entities.remove(infobox), map.entities.remove(infoboxLayer), 
                 Microsoft.Maps.Events.hasHandler(infobox, "mouseleave") && Microsoft.Maps.Events.removeHandler(infobox.mouseLeaveHandler), 
@@ -483,7 +508,7 @@
             }), deferredObject.promise;
         }, this.cancelRsvp = function(dinnerId) {
             var deferredObject = $q.defer();
-            return $http["delete"]("/api/rsvp?dinnerId=" + dinnerId).success(function(data) {
+            return $http.delete("/api/rsvp?dinnerId=" + dinnerId).success(function(data) {
                 data ? deferredObject.resolve({
                     success: !0
                 }) : deferredObject.resolve({

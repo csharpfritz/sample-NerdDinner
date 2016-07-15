@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NerdDinner.Web;
+using NerdDinner.Web.Common;
 using NerdDinner.Web.Models;
 using NerdDinner.Web.Persistence;
 
@@ -96,12 +97,14 @@ namespace NerdDinner.Web
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            loggerFactory.AddSimpleWebLogger(LogLevel.Error);
             loggerFactory.AddDebug();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
+                app.UseSimpleErrorLog();
             }
             else
             {
@@ -160,12 +163,17 @@ namespace NerdDinner.Web
             // Add MVC to the request pipeline
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name:"redirectjsdinner",
-                    template:"dinners/{*pathInfo}",
-                    defaults: new { controller = "Home", action = "Index" }
-                    );
-                routes.MapRoute(
+              routes.MapRoute(
+                  name: "redirectjsdinner",
+                  template: "dinners/{*pathInfo}",
+                  defaults: new { controller = "Home", action = "Index" }
+                  );
+              routes.MapRoute(
+                  name: "redirectjsErrors",
+                  template: "errors/{*pathInfo}",
+                  defaults: new { controller = "Home", action = "Index" }
+                  );
+              routes.MapRoute(
                      name: "default",
                      template: "{controller}/{action}/{id?}",
                      defaults: new { controller = "Home", action = "Index" });
