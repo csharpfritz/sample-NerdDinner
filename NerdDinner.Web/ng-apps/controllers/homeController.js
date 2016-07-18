@@ -16,7 +16,7 @@
 
     function homeController($scope, $location, dinner, mapService) {
         $scope.dinners = dinner.popular.query();
-
+        
         $scope.selectDinner = function (dinnerId) {
             $location.path("/dinners/detail/" + dinnerId).search({ nocache: new Date().getTime() });
         };

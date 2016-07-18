@@ -43,8 +43,9 @@ namespace NerdDinner.Web
 
             services.AddDbContext<NerdDinnerDbContext>(options =>
                     options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
-
-          services.AddTransient<INerdDinnerRepository, NerdDinnerRepository>();
+            
+            //Add application services
+            services.AddTransient<INerdDinnerRepository, NerdDinnerRepository>();
 
             // Add Identity services to the services container
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -115,9 +116,10 @@ namespace NerdDinner.Web
 
             // Add cookie-based authentication to the request pipeline
             app.UseIdentity();
-
+            // The following lines  app.UseThirdPartyAuthenicaiton enable logging in with login providers https://docs.asp.net/en/latest/security/authentication/sociallogins.html
             app.UseFacebookAuthentication(new FacebookOptions
             {
+                //TODO: HideKeys all authentications
                 AppId = "5609270052582677",
                 AppSecret = "3d9a853452f18ca5e928e96602307525"
             });
@@ -134,22 +136,6 @@ namespace NerdDinner.Web
                 ConsumerSecret = "fpo0oWRNc3vsZKlZSq1PyOSoeXlJd7NnG4Rfc94xbFXsdcc3nH"
             });
 
-            // The MicrosoftAccount service has restrictions that prevent the use of
-            // http://localhost:5001/ for test applications.
-            // As such, here is how to change this sample to uses http://ktesting.com:5001/ instead.
-
-            // Edit the Project.json file and replace http://localhost:5001/ with http://ktesting.com:5001/.
-
-            // From an admin command console first enter:
-            // notepad C:\Windows\System32\drivers\etc\hosts
-            // and add this to the file, save, and exit (and reboot?):
-            // 127.0.0.1 ktesting.com
-
-            // Then you can choose to run the app as admin (see below) or add the following ACL as admin:
-            // netsh http add urlacl url=http://ktesting:5001/ user=[domain\user]
-
-            // The sample app can then be run via:
-            // dnx . web
             app.UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions
             {
                 DisplayName = "MicrosoftAccount - Requires project changes",
@@ -172,7 +158,7 @@ namespace NerdDinner.Web
 
             });
 
-            //Populates the MusicStore sample data
+            //Populate dinner sample data
             SampleData.InitializeNerdDinner(app.ApplicationServices).Wait();
         }
     }
