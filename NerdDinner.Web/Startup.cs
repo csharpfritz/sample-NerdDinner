@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,8 +42,11 @@ namespace NerdDinner.Web
         {
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
 
-            services.AddDbContext<NerdDinnerDbContext>(options =>
-                    options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+            services.AddEntityFrameworkSqlite().AddDbContext<NerdDinnerDbContext>(options => {
+                    var connStringBuilder = new SqliteConnectionStringBuilder() {           DataSource = "./dinners.db"
+                    };
+                    options.UseSqlite(connStringBuilder.ToString());
+            });
 
           services.AddTransient<INerdDinnerRepository, NerdDinnerRepository>();
 
