@@ -4,6 +4,8 @@ var gulp = require("gulp"),
   rimraf = require("rimraf"),
   fs = require("fs"),
   less = require('gulp-less'),
+  watch = require('gulp-watch'),
+  batch = require('gulp-batch'),
   uglify = require('gulp-uglifyjs');
 
 var project = {
@@ -64,5 +66,15 @@ gulp.task('uglify', function () {
       }))
       .pipe(gulp.dest(project.webroot));
 });
+
+gulp.task('buildNg', ['copy', 'uglify']);
+
+gulp.task('watch', function() {
+
+  watch("ng-apps/**", batch(function(events,done) {
+    gulp.start('buildNg', done);
+  }));
+
+})
 
 // TODO: gulp default task that makes ready for publish
