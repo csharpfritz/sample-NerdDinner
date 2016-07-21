@@ -6,7 +6,7 @@ var gulp = require("gulp"),
   less = require('gulp-less'),
   uglify = require('gulp-uglifyjs');
 
-eval("var project = " + fs.readFileSync("./project.json"));
+var project = { webroot: "./wwwroot" };
 
 var paths = {
   bower: "./bower_components/",

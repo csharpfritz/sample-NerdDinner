@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using NerdDinner.Web;
 using NerdDinner.Web.Models;
 using NerdDinner.Web.Persistence;
+using System;
 
 namespace NerdDinner.Web
 {
@@ -51,6 +52,7 @@ namespace NerdDinner.Web
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Cookies.ApplicationCookie.AccessDeniedPath = "/Home/AccessDenied";
+                
             })
                     .AddEntityFrameworkStores<NerdDinnerDbContext>()
                     .AddDefaultTokenProviders();
@@ -77,7 +79,12 @@ namespace NerdDinner.Web
             }
 
             // Add session related services.
-            services.AddSession();
+            // TODO: Test Session timeout
+            services.AddSession(options =>
+            {
+               // options.CookieName = ".AdventureWorks.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+            });
 
             // Add the system clock service
             services.AddSingleton<ISystemClock, SystemClock>();
@@ -86,10 +93,10 @@ namespace NerdDinner.Web
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(
-                    "ManageStore",
+                    "ManageDinner",
                     authBuilder =>
                     {
-                        authBuilder.RequireClaim("ManageStore", "Allowed");
+                        authBuilder.RequireClaim("ManageDinner", "Allowed");
                     });
             });
         }      
@@ -116,7 +123,8 @@ namespace NerdDinner.Web
 
             // Add cookie-based authentication to the request pipeline
             app.UseIdentity();
-            // The following lines  app.UseThirdPartyAuthenicaiton enable logging in with login providers https://docs.asp.net/en/latest/security/authentication/sociallogins.html
+            //The following lines starting with app.UseThirdPartyAuthenicaiton enable logging in 
+            //with login providers https://docs.asp.net/en/latest/security/authentication/sociallogins.html
             app.UseFacebookAuthentication(new FacebookOptions
             {
                 //TODO: HideKeys all authentications

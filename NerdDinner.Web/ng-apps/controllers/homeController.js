@@ -20,7 +20,7 @@
         $scope.selectDinner = function (dinnerId) {
             $location.path("/dinners/detail/" + dinnerId).search({ nocache: new Date().getTime() });
         };
-
+        //Load Map
         $scope.loadMap = function () {
             mapService.loadMap($scope.dinners, 4);
         };
@@ -119,9 +119,38 @@
             title: '',
             description: '',
             eventDate: '',
+            eventTime: '',
             address: '',
             contactPhone: ''
         };
+        $scope.today = function () {
+            $scope.dinner.eventDate = new Date();
+
+        };
+        $scope.today();
+        $scope.clear = function () {
+            $scope.dinner.eventDate = null;
+        };
+        $scope.toggleMin = function() {
+            $scope.minDate = $scope.minDate ? null : new Date();
+        };
+        $scope.toggleMin();
+
+        $scope.open = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.opened = true;
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+    
 
         if (isUserAuthenticated.success == 'False') {
             $location.path('/account/login');
@@ -133,7 +162,7 @@
 
         $scope.changeAddress = function (address) {
             mapService.findAddress(address, true);
-        }
+        };
 
         $scope.add = function () {
             var result = dinner.addDinner($scope.dinner);
