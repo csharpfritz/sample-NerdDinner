@@ -140,7 +140,7 @@
             $event.preventDefault();
             $event.stopPropagation();
 
-            $scope.opened = true;
+            $scope.status.opened = true;
         };
 
         $scope.dateOptions = {
@@ -148,8 +148,39 @@
             startingDay: 1
         };
 
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.formats = ['dd-MMMM-yyyy hh:mm:ss', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate']
         $scope.format = $scope.formats[0];
+
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        var afterTomorrow = new Date();
+        afterTomorrow.setDate(tomorrow.getDate() + 2);
+        $scope.events =
+          [
+            {
+                date: tomorrow,
+                status: 'full'
+            },
+            {
+                date: afterTomorrow,
+                status: 'partially'
+            }
+          ];
+        $scope.getDinnerDay = function (date, mode) {
+            if (mode === 'day') {
+                var checkDay = new Date(date).setHours(0, 0, 0, 0);
+
+                for (var i = 0; i < $scope.events.length; i++) {
+                    var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
+
+                    if (checkDay === currentDay) {
+                        return $scope.events[i].status;
+                    }
+                }
+            }
+
+            return '';
+        };
     
 
         if (isUserAuthenticated.success == 'False') {

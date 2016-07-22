@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <p class="input-group">
-                    <input type="text" class="form-control" datepicker-popup="MM-dd-yyyy" 
+                    <input type="text" class="form-control" readonly datepicker-popup="MM-dd-yyyy hh:mm:ss" 
                            ng-model="dinner.eventDate" is-open="opened" min-date="minDate" datepicker-options="dateOptions"
                              placeholder="Event Date" />
                     <span class="input-group-btn">
@@ -27,7 +27,7 @@
                         <i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                     </p>
-                    <timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                    <timepicker ng-model="dinner.eventDate" hour-step="hstep" minute-step="mstep" show-meridian="true"></timepicker>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control" id="description" ng-model="dinner.description" placeholder="Description" />
