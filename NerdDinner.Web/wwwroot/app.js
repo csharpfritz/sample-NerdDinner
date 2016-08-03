@@ -126,7 +126,20 @@
             eventDate: "",
             address: "",
             contactPhone: ""
-        }, "False" == isUserAuthenticated.success && $location.path("/account/login"), $scope.loadDefaultMap = function() {
+        }, $scope.today = function() {
+            $scope.dinner.eventDate = new Date();
+        }, $scope.today(), $scope.clear = function() {
+            $scope.dinner.eventDate = null;
+        }, $scope.toggleMin = function() {
+            $scope.minDate = $scope.minDate ? null : new Date();
+        }, $scope.toggleMin(), $scope.open = function($event) {
+            $event.preventDefault(), $event.stopPropagation(), $scope.opened = !0;
+        }, $scope.dateOptions = {
+            formatYear: "yy",
+            startingDay: 1
+        }, $scope.formats = [ "dd-MMMM-yyyy", "yyyy/MM/dd", "dd.MM.yyyy", "shortDate" ], 
+        $scope.format = $scope.formats[0], "False" == isUserAuthenticated.success && $location.path("/account/login"), 
+        $scope.loadDefaultMap = function() {
             mapService.loadDefaultMap();
         }, $scope.changeAddress = function(address) {
             mapService.findAddress(address, !0);
@@ -164,7 +177,7 @@
     function deleteController($scope, $routeParams, $location, dinner, isUserAuthenticated) {
         "False" == isUserAuthenticated.success && $location.path("/account/login"), $scope.dinner = dinner.all.get({
             id: $routeParams.id
-        }), $scope["delete"] = function() {
+        }), $scope.delete = function() {
             var result = dinner.deleteDinner($routeParams.id);
             result.then(function(result) {
                 result.success && $location.path("/dinners/my");
@@ -182,7 +195,11 @@
     deleteController.$inject = [ "$scope", "$routeParams", "$location", "dinner", "isUserAuthenticated" ];
 }(), function() {
     "use strict";
-    function loginController($scope, $location) {}
+    function loginController($scope, $location) {
+        $scope.home = function() {
+            $location.path("/");
+        };
+    }
     angular.module("nerdDinner").controller("loginController", loginController), loginController.$inject = [ "$scope", "$location" ];
 }(), function() {
     "use strict";
@@ -216,6 +233,38 @@
         };
     }
     angular.module("nerdDinner").directive("rsvpSection", rsvpSection), rsvpController.$inject = [ "$scope", "$routeParams", "$location", "rsvpService" ];
+}(), function() {
+    "use strict";
+    function rsvpService($http, $q) {
+        this.addRsvp = function(dinnerId) {
+            var deferredObject = $q.defer();
+            return $http.post("/api/rsvp?dinnerId=" + dinnerId).success(function(data) {
+                data ? deferredObject.resolve({
+                    success: !0
+                }) : deferredObject.resolve({
+                    success: !1
+                });
+            }).error(function(err) {
+                deferredObject.resolve({
+                    error: err
+                });
+            }), deferredObject.promise;
+        }, this.cancelRsvp = function(dinnerId) {
+            var deferredObject = $q.defer();
+            return $http.delete("/api/rsvp?dinnerId=" + dinnerId).success(function(data) {
+                data ? deferredObject.resolve({
+                    success: !0
+                }) : deferredObject.resolve({
+                    success: !1
+                });
+            }).error(function(err) {
+                deferredObject.resolve({
+                    error: err
+                });
+            }), deferredObject.promise;
+        };
+    }
+    angular.module("nerdDinner").service("rsvpService", rsvpService), rsvpService.$inject = [ "$http", "$q" ];
 }(), function() {
     "use strict";
     function authService($http, $q) {
@@ -280,7 +329,7 @@
             },
             deleteDinner: function(dinnerId) {
                 var deferredObject = $q.defer();
-                return $http["delete"]("/api/dinners/" + dinnerId).success(function(data) {
+                return $http.delete("/api/dinners/" + dinnerId).success(function(data) {
                     deferredObject.resolve({
                         success: !0
                     });
@@ -377,7 +426,7 @@
                     title: currentDinnerTitle,
                     description: popupDescription(pin.Description, dateString, pin.rsvps),
                     titleClickHandler: showDetail,
-                    offset: new Microsoft.Maps.Point(-12, 40)
+                    offset: new Microsoft.Maps.Point((-12), 40)
                 };
                 null != infobox && (map.entities.remove(infobox), map.entities.remove(infoboxLayer), 
                 Microsoft.Maps.Events.hasHandler(infobox, "mouseleave") && Microsoft.Maps.Events.removeHandler(infobox.mouseLeaveHandler), 
@@ -483,7 +532,7 @@
             }), deferredObject.promise;
         }, this.cancelRsvp = function(dinnerId) {
             var deferredObject = $q.defer();
-            return $http["delete"]("/api/rsvp?dinnerId=" + dinnerId).success(function(data) {
+            return $http.delete("/api/rsvp?dinnerId=" + dinnerId).success(function(data) {
                 data ? deferredObject.resolve({
                     success: !0
                 }) : deferredObject.resolve({

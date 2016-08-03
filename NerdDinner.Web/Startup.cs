@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using NerdDinner.Web;
 using NerdDinner.Web.Models;
 using NerdDinner.Web.Persistence;
+using System;
 
 namespace NerdDinner.Web
 {
@@ -48,12 +49,13 @@ namespace NerdDinner.Web
                     options.UseSqlite(connStringBuilder.ToString());
             });
 
-          services.AddTransient<INerdDinnerRepository, NerdDinnerRepository>();
+            services.AddTransient<INerdDinnerRepository, NerdDinnerRepository>();
 
             // Add Identity services to the services container
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Cookies.ApplicationCookie.AccessDeniedPath = "/Home/AccessDenied";
+                
             })
                     .AddEntityFrameworkStores<NerdDinnerDbContext>()
                     .AddDefaultTokenProviders();
@@ -80,7 +82,12 @@ namespace NerdDinner.Web
             }
 
             // Add session related services.
-            services.AddSession();
+            // TODO: Test Session timeout
+            services.AddSession(options =>
+            {
+               // options.CookieName = ".AdventureWorks.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+            });
 
             // Add the system clock service
             services.AddSingleton<ISystemClock, SystemClock>();
@@ -89,10 +96,10 @@ namespace NerdDinner.Web
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(
-                    "ManageStore",
+                    "ManageDinner",
                     authBuilder =>
                     {
-                        authBuilder.RequireClaim("ManageStore", "Allowed");
+                        authBuilder.RequireClaim("ManageDinner", "Allowed");
                     });
             });
         }      
@@ -119,9 +126,11 @@ namespace NerdDinner.Web
 
             // Add cookie-based authentication to the request pipeline
             app.UseIdentity();
-
+            //The following lines starting with app.UseThirdPartyAuthenicaiton enable logging in 
+            //with login providers https://docs.asp.net/en/latest/security/authentication/sociallogins.html
             app.UseFacebookAuthentication(new FacebookOptions
             {
+                //TODO: HideKeys all authentications
                 AppId = "5609270052582677",
                 AppSecret = "3d9a853452f18ca5e928e96602307525"
             });
@@ -138,22 +147,6 @@ namespace NerdDinner.Web
                 ConsumerSecret = "fpo0oWRNc3vsZKlZSq1PyOSoeXlJd7NnG4Rfc94xbFXsdcc3nH"
             });
 
-            // The MicrosoftAccount service has restrictions that prevent the use of
-            // http://localhost:5001/ for test applications.
-            // As such, here is how to change this sample to uses http://ktesting.com:5001/ instead.
-
-            // Edit the Project.json file and replace http://localhost:5001/ with http://ktesting.com:5001/.
-
-            // From an admin command console first enter:
-            // notepad C:\Windows\System32\drivers\etc\hosts
-            // and add this to the file, save, and exit (and reboot?):
-            // 127.0.0.1 ktesting.com
-
-            // Then you can choose to run the app as admin (see below) or add the following ACL as admin:
-            // netsh http add urlacl url=http://ktesting:5001/ user=[domain\user]
-
-            // The sample app can then be run via:
-            // dnx . web
             app.UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions
             {
                 DisplayName = "MicrosoftAccount - Requires project changes",
@@ -176,7 +169,7 @@ namespace NerdDinner.Web
 
             });
 
-            //Populates the MusicStore sample data
+            //Populate dinner sample data
             SampleData.InitializeNerdDinner(app.ApplicationServices).Wait();
         }
     }

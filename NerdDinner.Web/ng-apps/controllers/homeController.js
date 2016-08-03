@@ -16,11 +16,11 @@
 
     function homeController($scope, $location, dinner, mapService) {
         $scope.dinners = dinner.popular.query();
-
+        
         $scope.selectDinner = function (dinnerId) {
             $location.path("/dinners/detail/" + dinnerId).search({ nocache: new Date().getTime() });
         };
-
+        //Load Map
         $scope.loadMap = function () {
             mapService.loadMap($scope.dinners, 4);
         };
@@ -119,9 +119,69 @@
             title: '',
             description: '',
             eventDate: '',
+            eventTime: '',
             address: '',
             contactPhone: ''
         };
+        $scope.today = function () {
+            $scope.dinner.eventDate = new Date();
+
+        };
+        $scope.today();
+        $scope.clear = function () {
+            $scope.dinner.eventDate = null;
+        };
+        $scope.toggleMin = function() {
+            $scope.minDate = $scope.minDate ? null : new Date();
+        };
+        $scope.toggleMin();
+
+        $scope.open = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.status.opened = true;
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.formats = ['dd-MMMM-yyyy hh:mm:ss', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate']
+        $scope.format = $scope.formats[0];
+
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        var afterTomorrow = new Date();
+        afterTomorrow.setDate(tomorrow.getDate() + 2);
+        $scope.events =
+          [
+            {
+                date: tomorrow,
+                status: 'full'
+            },
+            {
+                date: afterTomorrow,
+                status: 'partially'
+            }
+          ];
+        $scope.getDinnerDay = function (date, mode) {
+            if (mode === 'day') {
+                var checkDay = new Date(date).setHours(0, 0, 0, 0);
+
+                for (var i = 0; i < $scope.events.length; i++) {
+                    var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
+
+                    if (checkDay === currentDay) {
+                        return $scope.events[i].status;
+                    }
+                }
+            }
+
+            return '';
+        };
+    
 
         if (isUserAuthenticated.success == 'False') {
             $location.path('/account/login');
@@ -133,7 +193,7 @@
 
         $scope.changeAddress = function (address) {
             mapService.findAddress(address, true);
-        }
+        };
 
         $scope.add = function () {
             var result = dinner.addDinner($scope.dinner);

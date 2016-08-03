@@ -9,45 +9,45 @@ var gulp = require("gulp"),
   uglify = require('gulp-uglifyjs');
 
 var project = {
-  webroot: "./wwwroot"
+    webroot: "./wwwroot"
 };
 
 var paths = {
-  bower: "./bower_components/",
-  lib: "./" + project.webroot + "/lib/",
-  views: "./" + project.webroot + "/views/",
-  styles: "./" + project.webroot + "/css/",
-  images: "./" + project.webroot + "/images/",
+    bower: "./bower_components/",
+    lib: "./" + project.webroot + "/lib/",
+    views: "./" + project.webroot + "/views/",
+    styles: "./" + project.webroot + "/css/",
+    images: "./" + project.webroot + "/images/",
 };
 
 gulp.task("clean", function (cb) {
-  rimraf(paths.lib, cb);
+    rimraf(paths.lib, cb);
 });
 
 gulp.task("copy", ["clean"], function () {
-  var bower = {
-    "bootstrap": "bootstrap/dist/**/*.{js,map,css,ttf,svg,woff,eot}",
-    "bootstrap-touch-carousel": "bootstrap-touch-carousel/dist/**/*.{js,css}",
-    "hammer.js": "hammer.js/hammer*.{js,map}",
-    "jquery": "jquery/jquery*.{js,map}",
-    "jquery-validation": "jquery-validation/jquery.validate.js",
-    "jquery-validation-unobtrusive": "jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
-    "angular": "angular/angular*.{js,map}",
-    "angular-bootstrap": "angular-bootstrap/ui-bootstrap*.js",
-    "angular-resource": "angular-resource/angular-resource*.{js,map}",
-    "angular-route": "angular-route/angular-route*.js"
-  }
+    var bower = {
+        "bootstrap": "bootstrap/dist/**/*.{js,map,css,ttf,svg,woff,eot}",
+        "bootstrap-touch-carousel": "bootstrap-touch-carousel/dist/**/*.{js,css}",
+        "hammer.js": "hammer.js/hammer*.{js,map}",
+        "jquery": "jquery/jquery*.{js,map}",
+        "jquery-validation": "jquery-validation/jquery.validate.js",
+        "jquery-validation-unobtrusive": "jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+        "angular": "angular/angular*.{js,map}",
+        "angular-bootstrap": "angular-bootstrap/ui-bootstrap*.js",
+        "angular-resource": "angular-resource/angular-resource*.{js,map}",
+        "angular-route": "angular-route/angular-route*.js"
+    }
 
-  for (var destinationDir in bower) {
-    gulp.src(paths.bower + bower[destinationDir])
-      .pipe(gulp.dest(paths.lib + destinationDir));
-  }
+    for (var destinationDir in bower) {
+        gulp.src(paths.bower + bower[destinationDir])
+          .pipe(gulp.dest(paths.lib + destinationDir));
+    }
 
-  gulp.src('ng-apps/views/*.html')
-    .pipe(gulp.dest(paths.views));
+    gulp.src('ng-apps/views/*.html')
+      .pipe(gulp.dest(paths.views));
 
-  gulp.src('ng-apps/content/images/*.*')
-    .pipe(gulp.dest(paths.images));
+    gulp.src('ng-apps/content/images/*.*')
+      .pipe(gulp.dest(paths.images));
 });
 
 gulp.task('less', function () {
@@ -69,11 +69,12 @@ gulp.task('uglify', function () {
 
 gulp.task('buildNg', ['copy', 'uglify']);
 
-gulp.task('watch', function() {
 
-  watch("ng-apps/**", batch(function(events,done) {
-    gulp.start('buildNg', done);
-  }));
+gulp.task('watch', function () {
+
+    watch("ng-apps/**", batch(function (events, done) {
+        gulp.start('buildNg', done);
+    }));
 
 })
 
