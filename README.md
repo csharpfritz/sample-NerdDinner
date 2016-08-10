@@ -1,10 +1,9 @@
 NerdDinner 1.0 Sample
-----------------------
 ----------
 NerdDinner 1.0  is an ASP.NET Core sample application is based on the  [ASP.NET MVC  2009 project](http://www.nerddinner.com/) with the same name. This repository is working single page application(SPA) sample that uses Angular 1 and ASP.NET Core 1.0. 
-Setting Up 
+Set Up 
 ----------------------
-----------
+
 **Prerequisite**
 Download .NET Core for Windows, Linux, Mac, Docker for more options please visit the [dot.net](https://www.microsoft.com/net/download#core).   
 
