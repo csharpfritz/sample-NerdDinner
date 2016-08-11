@@ -5,7 +5,7 @@ Set Up
 ----------------------
 
 **Prerequisite**
-Download .NET Core for Windows, Linux, Mac, Docker for more options please visit the [dot.net](https://www.microsoft.com/net/download#core).   
+Download .NET Core for Windows, Linux, Mac for more options please visit the [dot.net](https://www.microsoft.com/net/download#core).   
 
 **Running NerdDinner 1.0 Sample**
 
@@ -32,10 +32,10 @@ Download .NET Core for Windows, Linux, Mac, Docker for more options please visit
  4. Navigate to` localhost:5000 `
 ![localhost](https://cloud.githubusercontent.com/assets/2546640/17595325/957160a0-5fba-11e6-9d8a-39df6da6486a.PNG)
 
- Ready to go sample(on any OS)
+ Ready to go sample
 ----------------------
  
-1.  [ASP.NET Core 1.0](https://docs.asp.net/en/latest/getting-started.html) Application
+1. NerdDinner 1.0 is [ASP.NET Core 1.0](https://docs.asp.net/en/latest/getting-started.html) application and will run on Windows, Linux,and Mac.
 
 2.  This sample uses [SQLite](https://ef.readthedocs.io/en/latest/platforms/netcore/new-db-sqlite.html) backend.  
     - Notice that when you run the application `dotnet run`  the SQLite database is built 
