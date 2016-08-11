@@ -28,7 +28,10 @@ Download .NET Core for Windows, Linux, Mac, Docker for more options please visit
     cd NerdDinner.web
     dotnet run 
 ```
- 4. Navigate to  ```sh localhost:5000 ```
+ 4. Navigate to  
+```sh 
+ localhost:5000 
+```
 
 Thank you for using the sample-NerdDinner application.
 
