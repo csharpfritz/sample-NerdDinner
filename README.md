@@ -28,10 +28,10 @@ Download .NET Core for Windows, Linux, Mac, Docker for more options please visit
     cd NerdDinner.web
     dotnet run 
 ```
+![dotnetrunlocalhost](https://cloud.githubusercontent.com/assets/2546640/17595124/ce408646-5fb9-11e6-9939-2248c9fdf3cd.gif)
  4. Navigate to  
 ```sh 
  localhost:5000 
 ```
-
+![localhost](https://cloud.githubusercontent.com/assets/2546640/17595325/957160a0-5fba-11e6-9d8a-39df6da6486a.PNG)
 Thank you for using the sample-NerdDinner application.
-
