@@ -31,4 +31,14 @@ Download .NET Core for Windows, Linux, Mac, Docker for more options please visit
 ![dotnetrunlocalhost](https://cloud.githubusercontent.com/assets/2546640/17595124/ce408646-5fb9-11e6-9939-2248c9fdf3cd.gif)
  4. Navigate to` localhost:5000 `
 ![localhost](https://cloud.githubusercontent.com/assets/2546640/17595325/957160a0-5fba-11e6-9d8a-39df6da6486a.PNG)
+
+ Ready to go sample(on any OS)
+----------------------
+ 
+1.  [ASP.NET Core 1.0](https://docs.asp.net/en/latest/getting-started.html) Application
+
+2.  This sample uses [SQLite](https://ef.readthedocs.io/en/latest/platforms/netcore/new-db-sqlite.html) backend.  
+    - Notice that when you run the application `dotnet run`  the SQLite database is built 
+![buildingthedb](https://cloud.githubusercontent.com/assets/2546640/17596795/0d078d96-5fc1-11e6-9506-0304c4155fb3.gif)
+
 Thank you for using the sample-NerdDinner application.
