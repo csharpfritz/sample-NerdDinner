@@ -21,14 +21,13 @@ Download .NET Core for Windows, Linux, Mac, Docker for more options please visit
     cd sample-NerdDinner
     dotnet restore 
 ```
-
+![enter image description here](https://lh3.googleusercontent.com/-HWOSRC2Khbc/V6yTHSs2eYI/AAAAAAAAB1k/vvr4l2Gglm0OlGSMm_HIofsLucW_t7ZWgCLcB/s0/gitclonedotnetrestore2.gif "gitclonedotnetrestore2.gif")
  3. Navigate to the NerdDinner.web folder and run the application 
  
  ```
     cd NerdDinner.web
     dotnet run 
 ```
-
  4. Navigate to  ```localhost:5000 ```
 
 Thank you for using the sample-NerdDinner application.
