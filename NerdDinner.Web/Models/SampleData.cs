@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using NerdDinner.Web.Persistence;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace NerdDinner.Web.Models
 {
@@ -30,10 +31,11 @@ namespace NerdDinner.Web.Models
                     await userManager.CreateAsync(applicationUser, user.Password);
                 }
 
-                var dinners = GetDinners();
-                if (dinners.Length == 0)
+                
+                if (repository.Dinners.Count() == 0)
                 {
-                  foreach (Dinner dinner in dinners)
+                  var newDinners = GetDinners();
+                  foreach (Dinner dinner in newDinners)
                   {
                     await repository.CreateDinnerAsync(dinner);
                   }

@@ -69,6 +69,7 @@ gulp.task('uglify', function () {
 
 gulp.task('buildNg', ['copy', 'uglify']);
 
+
 gulp.task('watch', function () {
 
     watch("ng-apps/**", batch(function (events, done) {
