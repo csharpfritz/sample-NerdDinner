@@ -1,13 +1,16 @@
 body {
-  background: #f7f4e6 url('/images/bkg.jpg') repeat-x top left !important;
-  font-family: arial, helvetica, clean, sans-serif;
+  /*background: #f7f4e6 url('/images/bkg.jpg') repeat-x top left !important;*/
+  background: #FFFFFF;
+  font-family:Montserrat, sans-serif;
+  /*font-family:  arial, helvetica, clean, sans-serif;*/
   font-size: 13px;
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
 }
 header {
-  background: transparent url('/images/header-bkg.jpg') no-repeat bottom left;
+  /*background: transparent url('/images/header-bkg.jpg') no-repeat bottom left;*/
+  background: #FFFFFF;
   padding: 25px 10px 0 0;
 }
 .logo {
@@ -22,11 +25,13 @@ header {
   right: 5px;
 }
 .login-display {
-  color: #660000;
+  color: #607080;
+  /*color: #660000;*/
   font-size: 1.1em;
 }
 .link {
-  color: #660000;
+  color: #607080;
+  /*color: #660000;*/
   text-decoration: underline;
   font-weight: bold;
 }
@@ -61,7 +66,7 @@ h4 {
   width: 373px;
   height: 130px;
   padding: 10px 10px 25px 10px;
-  background: transparent url('/images/search-bubble.png') no-repeat;
+  /*background: transparent url('/images/search-bubble.png') no-repeat;*/
 }
 .search-box > div {
   margin: 10px;
@@ -74,7 +79,7 @@ h4 {
   padding: 30px;
   padding-top: 20px;
   border-radius: 0px 0px 10px 10px;
-  box-shadow: 2px 2px 2px #888888;
+  box-shadow: 2px 2px 2px #FFFFFF;
   min-height: 492px;
 }
 .nerd-map {
