@@ -1,7 +1,7 @@
 body {
   /*background: #f7f4e6 url('/images/bkg.jpg') repeat-x top left !important;*/
   background: #FFFFFF;
-  font-family:Montserrat, sans-serif;
+  font-family: Open Sans, sans-serif;
   /*font-family:  arial, helvetica, clean, sans-serif;*/
   font-size: 13px;
   font-style: normal;
@@ -122,6 +122,6 @@ h4 {
     display: none;
   }
   .nerd-search {
-    float: right;
+    float: none;
   }
 }

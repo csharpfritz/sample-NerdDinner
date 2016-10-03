@@ -1,8 +1,6 @@
 <div class="container main-head">
     <div class="row">
-        <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 nerd-text">
-            <img src="/images/caption.png" />
-        </div>
+        
         <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5 nerd-search">
             <div class="search-box pull-right">
                 <div>
@@ -10,8 +8,12 @@
                     <span> or </span>
                 </div>
                 <div>
-                    <input type="text" class="form-control pull-left search-text" ng-model="searchForm.location" id="location" placeholder="Enter your location">
-                    <button type="submit" class="btn btn-default pull-right" ng-click="showLocation(searchForm.location)">Search</button>
+                    <input type="text" class="form-control pull-left search-text" ng-model="searchForm.location" id="location" placeholder="Search for dinner by location">
+                    <!--<button type="submit" class="btn btn-default pull-right" ng-click="showLocation(searchForm.location)">Search</button>-->
+                    <button type="submit" class="btn btn-default pull-right" ng-click="showLocation(searchForm.location)"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+                <div>
+
                 </div>
             </div>
         </div>
