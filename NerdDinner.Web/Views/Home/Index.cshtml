@@ -18,19 +18,21 @@
         </div>
     </div>
     <div class="container">
-        <ul class="nav nav-tabs navbar-right">
-            <li role="presentation"><a href="/">Find Dinner</a></li>
-            @if (User.Identity.IsAuthenticated)
+        <nav class="navbar navbar-collapse">
+            <ul class="nav nav-tabs navbar-right">
+                <li role="presentation"><a href="/">Find Dinner</a></li>
+                @if (User.Identity.IsAuthenticated)
             {
-                <li role="presentation"><a href="/dinners/add">Host Dinner</a></li>
+                    <li role="presentation"><a href="/dinners/add">Host Dinner</a></li>
                     <li role="presentation"><a href="/dinners/my">My Dinners</a></li>
-            }
-            else
-            {
-                <li role="presentation"><a href="/account/login">Host Dinner</a></li>
-            }
-            <li role="presentation"><a href="/about">About</a></li>
-        </ul>
+                }
+                else
+                {
+                    <li role="presentation"><a href="/account/login">Host Dinner</a></li>
+                }
+                <li role="presentation"><a href="/about">About</a></li>
+            </ul>
+        </nav>
     </div>
 </header>
 

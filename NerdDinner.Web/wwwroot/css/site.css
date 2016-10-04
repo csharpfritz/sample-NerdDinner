@@ -35,6 +35,7 @@ header {
   text-decoration: underline;
   font-weight: bold;
 }
+
 .container {
   max-width: 1024px !important;
 }
@@ -117,11 +118,12 @@ h4 {
   width: 155px;
   height: 200px;
 }
+
 @media screen and (max-width: 880px) {
   .nerd-text {
     display: none;
   }
-  .nerd-search {
-    float: none;
+  .nerd-search .input-group-addon{
+    background: white !important; 
   }
 }
