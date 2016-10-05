@@ -13,6 +13,24 @@ header {
   background: #FFFFFF;
   padding: 25px 10px 0 0;
 }
+h1,
+
+h2,
+
+h3,
+
+h4,
+
+h5,
+
+h6 {
+
+    font-family: Open Sans, sans-serif;
+
+}
+h4 { color: #337ab7; }
+
+
 .logo {
   cursor: pointer;
 }
@@ -50,6 +68,7 @@ header {
 }
 h4 {
   margin-top: 0 !important;
+  color: #337ab7;
 }
 .main-body {
   margin-bottom: 20px;
