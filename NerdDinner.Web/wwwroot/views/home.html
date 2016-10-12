@@ -1,6 +1,9 @@
 <div class="section">
 <div class="container-fluid main-head">
     <div class="row">
+        <h1> Eat. Share. Learn. Code.</h1>
+        <br>
+        <p class ="p-main"> Nerd Dinner where people come together to share code, learn from others, over a good meal </p>
         <div class="col-md-6 col-md-offset-3 text-center">
             <div class ="search-box pull-right">
                 <div>
@@ -17,11 +20,12 @@
     
 </div>
 
-
+<div class="section">
 <div class="container-fluid main-view">
     <div class="row">
         <div class="col-md-6 col-md-offset-3 text-center">
-            <h4>Dinners Near Me</h4>
+            <h1>Dinners Near Me</h1>
+            <br>
         </div>
     </div>
  
@@ -48,21 +52,29 @@
     </div>
 
 </div>
-<div class="container">
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 nerd-list">
-        <h4>Popular Dinners</h4>
-        <ul class="dinner-list" ng-repeat="dinner in dinners">
-            <li>
-                <div>
-                    <a href="" class="link" ng-click="selectDinner(dinner.dinnerId)" ng-mouseover="showLocationPin(dinner)" ng-mouseleave="hideInfoBoxPin()">{{dinner.title}}</a>
-                </div>
-                <div>
-                    <span><b>{{dinner.eventDate | date:'MMM dd'}}</b></span>
-                    <span> with </span>
-                    <span>{{dinner.rsvps.length}}</span>
-                    <span> RSVPs </span>
-                </div>
-            </li>
-        </ul>
+</div>
+<div class="section">
+    <div class="container-fluid main-view">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <h1>Popular Dinners</h1>
+                <br>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 nerd-list">
+            <ul class="dinner-list" ng-repeat="dinner in dinners">
+                <li>
+                    <div>
+                        <a href="" class="link" ng-click="selectDinner(dinner.dinnerId)" ng-mouseover="showLocationPin(dinner)" ng-mouseleave="hideInfoBoxPin()">{{dinner.title}}</a>
+                    </div>
+                    <div>
+                        <span><b>{{dinner.eventDate | date:'MMM dd'}}</b></span>
+                        <span> with </span>
+                        <span>{{dinner.rsvps.length}}</span>
+                        <span> RSVPs </span>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
- </div>
+</div>

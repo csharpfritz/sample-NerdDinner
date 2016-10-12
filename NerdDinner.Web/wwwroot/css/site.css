@@ -19,6 +19,7 @@ h1 {
  
     font-family: Open Sans, sans-serif;
     font-size: 30px;
+    text-align: center;
     color: #337ab7;
 }
 
@@ -33,13 +34,23 @@ h5,
 h6 {
 
     font-family: Open Sans, sans-serif;
+    margin-top: 20px;
+    margin-bottom: 20px;
 
 }
 h4 { 
     color: #337ab7; 
 
 }
+p {
+    margin: 0 0 10px;
+}
 
+.p-main {
+    margin-bottom: 20px;
+    font-size: 16px;
+
+}
 .logo {
   cursor: pointer;
 }
@@ -88,8 +99,12 @@ h4 {
   padding: 20px;
 }
 .main-head {
-  margin-top: 20px;
-  padding: 0 !important;
+  /*margin-top: 20px;
+  padding: 0 !important;*/
+  min-height: 100%;
+  text-align: center;
+  padding-top: 200px;
+  padding-bottom: 120px;
 }
 .search-box {
   width: 373px;
@@ -110,6 +125,12 @@ h4 {
   border-radius: 0px 0px 10px 10px;
   box-shadow: 2px 2px 2px #FFFFFF;
   min-height: 492px;
+}
+.section {
+  position: relative;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  text-align: center;
 }
 .nerd-map {
   position: relative;
