@@ -5,32 +5,37 @@
 <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" />
 <link rel="stylesheet" href="~/lib/bootstrap-touch-carousel/css/bootstrap-touch-carousel.css" />
 <link rel="stylesheet" href="~/css/site.css" />
-
-
-    <div class="container-fluid">
+    @*<div class="container-fluid">
         <div class="row parent">
             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 ">
                 <a href="/"><img class="logo" src="~/images/logo.png" /></a>
             </div>
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right child">
+            @*<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-right child">
                 @await Html.PartialAsync("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <nav class="navbar navbar-collapse">
-            <ul class="nav nav-tabs navbar-right">
-                <li role="presentation"><a href="/">Find Dinner</a></li>
+            </div>*@
+   
+
+    <div class="container main-head">
+        <nav class="navbar navbar-full navbar-light bg-faded">
+            <a class="navbar-brand" href="/"> Nerd Dinner</a>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-item"><a class="nav-link" href="/">Find Dinner</a></li>
                 @if (User.Identity.IsAuthenticated)
             {
-                    <li role="presentation"><a href="/dinners/add">Host Dinner</a></li>
-                    <li role="presentation"><a href="/dinners/my">My Dinners</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dinners/add">Host Dinner</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/dinners/my">My Dinners</a></li>
                 }
                 else
                 {
-                    <li role="presentation"><a href="/account/login">Host Dinner</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/account/login">Host Dinner</a></li>
                 }
-                <li role="presentation"><a href="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="">
+                    Log On
+                    @*TODO: Figure out how to embed partial view into a list*@ 
+                    @*@await Html.PartialAsync("_LoginPartial")*@
+                  </a>
+                </li>
             </ul>
         </nav>
     </div>

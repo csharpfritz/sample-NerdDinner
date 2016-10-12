@@ -7,13 +7,20 @@ body {
   font-style: normal;
   font-variant: normal;
   font-weight: normal;
+
 }
+
 header {
   /*background: transparent url('/images/header-bkg.jpg') no-repeat bottom left;*/
   background: #FFFFFF;
   padding: 25px 10px 0 0;
 }
-h1,
+h1 {
+ 
+    font-family: Open Sans, sans-serif;
+    font-size: 30px;
+    color: #337ab7;
+}
 
 h2,
 
@@ -28,8 +35,10 @@ h6 {
     font-family: Open Sans, sans-serif;
 
 }
-h4 { color: #337ab7; }
+h4 { 
+    color: #337ab7; 
 
+}
 
 .logo {
   cursor: pointer;
@@ -145,4 +154,5 @@ h4 {
   .nerd-search .input-group-addon{
     background: white !important; 
   }
+  
 }
