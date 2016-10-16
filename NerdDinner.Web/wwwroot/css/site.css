@@ -132,7 +132,7 @@ p {
   border-top: solid 3px transparent;
 }
 .navbar ul.nav > li > a:hover {
-  border-top: solid 3px #337ab7;
+  border-top: solid 3px #;
 }
 @media (max-width: 767px) {
   .navbar ul.nav > li > a:hover {
@@ -142,7 +142,7 @@ p {
 .navbar ul.nav > li.active > a,
 .navbar ul.nav > li.open > a {
   text-decoration: none !important;
-  border-top: solid 3px #337ab7;
+  border-top: solid 3px #004853;
 }
 @media (max-width: 767px) {
   .navbar ul.nav > li.active > a,
@@ -206,7 +206,8 @@ h4 {
   padding-top: 20px;
   border-radius: 0px 0px 10px 10px;
   box-shadow: 2px 2px 2px #FFFFFF;
-  min-height: 492px;
+  /*min-height: 492px;*/
+  min-height: 100%
 }
 .section {
   position: relative;
