@@ -16,8 +16,8 @@
    
 
     <div class="container-fluid">
-        <nav class="navbar navbar-full navbar-light bg-faded">
-            <a class="navbar-brand" href="/"> Nerd Dinner</a>
+        <nav class="navbar navbar-full navbar-fixed-top">
+            <a class="navbar-brand" href="/"> NERD DINNER</a>
             <ul class="nav navbar-nav navbar-right">
                 <li class="nav-item"><a class="nav-link" href="/">Find Dinner</a></li>
                 @if (User.Identity.IsAuthenticated)
@@ -31,9 +31,9 @@
                 }
                 <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
                 <li class="nav-item"><a class="nav-link" href="">
-                    Log On
+                    
                     @*TODO: Figure out how to embed partial view into a list*@ 
-                    @*@await Html.PartialAsync("_LoginPartial")*@
+                    @await Html.PartialAsync("_LoginPartial")
                   </a>
                 </li>
             </ul>
@@ -45,11 +45,11 @@
     <ng-view></ng-view>
 </div>
 
-@section scripts {
-    <script src="~/lib/angular/angular.js"></script>
-    <script src="~/lib/angular-resource/angular-resource.js"></script>
-    <script src="~/lib/angular-route/angular-route.js"></script>
-    <script src="~/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script src="@Url.Content("/app.js")" type="text/javascript"></script>
-    <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
-}
+    @section scripts {
+        <script src="~/lib/angular/angular.js"></script>
+        <script src="~/lib/angular-resource/angular-resource.js"></script>
+        <script src="~/lib/angular-route/angular-route.js"></script>
+        <script src="~/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+        <script src="@Url.Content("/app.js")" type="text/javascript"></script>
+        <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+    }
