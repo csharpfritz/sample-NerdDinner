@@ -40,6 +40,7 @@ h6 {
 
 }
 h4 { 
+    font-family: Open Sans, sans-serif;
     color: #337ab7; 
 
 }
@@ -50,6 +51,7 @@ hr {
     border-top: 1px solid #ccc;
     margin: 1em 0;
     padding: 0; 
+
 }
 .section h1.title {
   display: inline-block;
@@ -76,6 +78,11 @@ hr {
 }
 .section h2.title span {
   font-size: 40px;
+}
+ h4.title {
+     text-transform: uppercase;
+     color: #343838;
+     font-size: 20px;
 }
 p {
     margin: 0 0 10px;
