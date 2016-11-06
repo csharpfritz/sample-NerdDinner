@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using NerdDinner.Web;
 using NerdDinner.Web.Models;
 using NerdDinner.Web.Persistence;
 using System;
+using System.IO.Compression;
 
 namespace NerdDinner.Web
 {
@@ -88,6 +90,15 @@ namespace NerdDinner.Web
                // options.CookieName = ".AdventureWorks.Session";
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
             });
+            // Add Compression Middleware 
+            services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Fastest);
+
+            services.AddResponseCompression(options =>
+
+            {
+                options.Providers.Add<GzipCompressionProvider>();
+            });
+
 
             // Add the system clock service
             services.AddSingleton<ISystemClock, SystemClock>();
@@ -118,6 +129,8 @@ namespace NerdDinner.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            // Add to app Compression
+            app.UseResponseCompression();
             // Configure Session.
             app.UseSession();
 
