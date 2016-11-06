@@ -31,13 +31,14 @@
     "Microsoft.AspNetCore.Authentication.Google": "1.0.0",
     "Microsoft.AspNetCore.Authentication.Twitter": "1.0.0",
     "Microsoft.AspNetCore.Authentication.MicrosoftAccount": "1.0.0",
+    "Microsoft.AspNetCore.AzureAppServicesIntegration": "1.0.0-*",
     "BundlerMinifier.Core": "2.0.238",
     "Microsoft.NETCore.App": {
       "version": "1.0.0",
       "type": "platform"
     },
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0"
-    
+
   },
 
   "tools": {

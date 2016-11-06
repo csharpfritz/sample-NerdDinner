@@ -11,7 +11,8 @@ namespace NerdDinner.Web
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
+                .UseAzureAppServices()
+                //.UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
 
