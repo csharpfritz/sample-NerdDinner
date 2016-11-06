@@ -161,7 +161,7 @@ p {
     border-color:#ccc;
 }
 .navbar-toggle .icon-bar {
-  background-color: #004853; /* Changes regular toggle color */
+  background-color: #004853; 
 }
 .navbar-toggle .icon-bar:hover {
   background-color: #fff; 
@@ -202,6 +202,7 @@ h4 {
   text-align: center;
   padding-top: 200px;
   padding-bottom: 120px;
+  
 }
 .search-box {
   position: relative;
