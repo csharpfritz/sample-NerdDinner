@@ -2,16 +2,21 @@
 
 @if (User.Identity.IsAuthenticated)
 {
-    <form asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
-        <div class="login-display">
-            <span>Hello </span><span><b>@User.Identity.Name!</b></span>
-            <span> [ </span><a href="javascript:document.getElementById('logoutForm').submit()" class="link">Log off</a><span> ] </span>
-        </div>
+    <form asp-area=""  asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+       
+            <li class="nav-item">
+                <span>  </span> Hello <b>@User.Identity.Name!</b>  <span>  </span> 
+            </li>
+            <li class="nav-item">
+                <span>  </span><a href="javascript:document.getElementById('logoutForm').submit()" class="link">Log off</a><span>  </span>
+            </li>
+        </ul>
     </form>
 }
 else
 {
-    <div class="login-display">
-        <span> [ </span><a id="loginLink" class="link" asp-controller="account" asp-action="login">Log On</a><span> ] </span>
-    </div>
+    <li class="nav-item">
+        <span> </span><a id="loginLink" class="link" asp-controller="account" asp-action="login">Log On</a><span>  </span>
+    </li>
 }
