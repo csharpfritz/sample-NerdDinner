@@ -33,7 +33,7 @@
     "Microsoft.AspNetCore.Authentication.MicrosoftAccount": "1.0.0",
     "BundlerMinifier.Core": "2.0.238",
     "Microsoft.NETCore.App": {
-      "version": "1.0.0",
+      "version": "1.1.0-preview1-*",
       "type": "platform"
     },
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0"
@@ -48,7 +48,7 @@
   },
 
   "frameworks": {
-    "netcoreapp1.0": {
+    "netcoreapp1.1": {
       "imports": [    
         "dotnet5.6",
         "portable-net45+win8"
