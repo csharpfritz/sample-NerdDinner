@@ -12,7 +12,6 @@ namespace NerdDinner.Web
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseAzureAppServices()
-                //.UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
 
