@@ -128,12 +128,12 @@ namespace NerdDinner.Web
             app.UseIdentity();
             //The following lines starting with app.UseThirdPartyAuthenicaiton enable logging in 
             //with login providers https://docs.asp.net/en/latest/security/authentication/sociallogins.html
-            app.UseFacebookAuthentication(new FacebookOptions
-            {
-                //TODO: HideKeys all authentications
-                AppId = "5609270052582677",
-                AppSecret = "3d9a853452f18ca5e928e96602307525"
-            });
+            //app.UseFacebookAuthentication(new FacebookOptions
+            //{
+            //    //TODO: HideKeys all authentications
+            //    AppId = "5609270052582677",
+            //    AppSecret = "3d9a853452f18ca5e928e96602307525"
+            //});
 
             app.UseGoogleAuthentication(new GoogleOptions
             {
