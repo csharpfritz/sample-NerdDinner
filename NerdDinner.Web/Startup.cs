@@ -91,13 +91,12 @@ namespace NerdDinner.Web
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
             });
             // Add Compression Middleware 
-            services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Fastest);
+           //services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Fastest);
 
-            services.AddResponseCompression(options =>
-
-            {
-                options.Providers.Add<GzipCompressionProvider>();
-            });
+           //services.AddResponseCompression(options =>
+           // {
+           //    options.Providers.Add<GzipCompressionProvider>();
+           // });
 
 
             // Add the system clock service
@@ -129,8 +128,13 @@ namespace NerdDinner.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            
+            
             // Add to app Compression
-            app.UseResponseCompression();
+            //app.UseResponseCompression();
+
+            
+            
             // Configure Session.
             app.UseSession();
 
