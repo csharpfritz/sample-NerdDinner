@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using NerdDinner.Web;
 using NerdDinner.Web.Models;
 using NerdDinner.Web.Persistence;
 using System;
+using System.IO.Compression;
 
 namespace NerdDinner.Web
 {
@@ -18,6 +20,7 @@ namespace NerdDinner.Web
     {
         public Startup(IHostingEnvironment env)
         {
+    
             var builder = new ConfigurationBuilder()
                .SetBasePath(env.ContentRootPath)
                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
@@ -26,8 +29,10 @@ namespace NerdDinner.Web
 
             if (env.IsDevelopment())
             {
+                builder.AddUserSecrets();
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
                 builder.AddApplicationInsightsSettings(developerMode: true);
+                
             }
             Configuration = builder.Build();
 
@@ -88,6 +93,14 @@ namespace NerdDinner.Web
                // options.CookieName = ".AdventureWorks.Session";
                 options.IdleTimeout = TimeSpan.FromSeconds(10);
             });
+            // Add Compression Middleware 
+           //services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Fastest);
+
+           //services.AddResponseCompression(options =>
+           // {
+           //    options.Providers.Add<GzipCompressionProvider>();
+           // });
+
 
             // Add the system clock service
             services.AddSingleton<ISystemClock, SystemClock>();
@@ -118,40 +131,35 @@ namespace NerdDinner.Web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            // Add to app Compression
+            //app.UseResponseCompression();
             // Configure Session.
             app.UseSession();
-
             // Add static files to the request pipeline
             app.UseStaticFiles();
-
             // Add cookie-based authentication to the request pipeline
             app.UseIdentity();
             //The following lines starting with app.UseThirdPartyAuthenicaiton enable logging in 
             //with login providers https://docs.asp.net/en/latest/security/authentication/sociallogins.html
-            app.UseFacebookAuthentication(new FacebookOptions
-            {
-                //TODO: HideKeys all authentications
-                AppId = "5609270052582677",
-                AppSecret = "3d9a853452f18ca5e928e96602307525"
-            });
 
             app.UseGoogleAuthentication(new GoogleOptions
             {
-                ClientId = "500918194801-v85iqffirr06ge97e5i901j1j455k9lp.apps.googleusercontent.com",
-                ClientSecret = "5nvZDaPvNtoCqukUbuo2qEOF"
+                ClientId = Configuration["Authentication:Google:ClientId"],
+                ClientSecret = Configuration["Authentication:Google:ClientSecret"]
             });
 
             app.UseTwitterAuthentication(new TwitterOptions
             {
-                ConsumerKey = "lDSPIu480ocnXYZ9DumGCDw37",
-                ConsumerSecret = "fpo0oWRNc3vsZKlZSq1PyOSoeXlJd7NnG4Rfc94xbFXsdcc3nH"
+                ConsumerKey = Configuration["Authentication:Twitter:ConsumerKey"],
+                ConsumerSecret = Configuration["Authentication:Twitter:ConsumerSecret"]
             });
 
             app.UseMicrosoftAccountAuthentication(new MicrosoftAccountOptions
             {
                 DisplayName = "MicrosoftAccount - Requires project changes",
-                ClientId = "000000004012C08A",
-                ClientSecret = "GaMQ2hCnqAC6EcDLnXsAeBVIJOLmeutL"
+                ClientId = Configuration["Authentication:Microsoft:ClientID"],
+                ClientSecret =Configuration ["Authentication: Microsoft:ClientSecret"]
             });
 
             // Add MVC to the request pipeline
